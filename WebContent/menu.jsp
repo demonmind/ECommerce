@@ -62,9 +62,8 @@ body{
 	if(sess == null || sess == "") { 
 		out.println("<a href='login.jsp' class='home'>Login</a><a href='register.jsp' class='home'>Register</a>"); 
 	} else { 
-		out.println("<span class='greet'>Hello "+ sess+ "</span><a href='login.jsp?logout=do' class='home'>Logout</a>"); 
+		out.println("<span class='greet'>Hello "+ sess+ "</span><a href='login.jsp?logout=do' class='home'>Logout</a><a href='profile.jsp' class='home'>Profile</a>"); 
 	} %>
-	<a href='profile.jsp' class='home'>Profile</a>
 	<a href='viewcart.jsp' class='home'>View Cart</a>
 	<a href='inventory.jsp' class='home'>Browse Products</a>
 	<a href='main.jsp' class='home'>Home</a>
