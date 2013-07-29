@@ -97,6 +97,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ba5cb', end
 <jsp:include page="menu.jsp"></jsp:include>
 <% if (request.getParameter("logout") != null) {  
     session.invalidate();
+    ServletContext sc = getServletContext(); 
+	sc.setAttribute("shop", null);
     response.sendRedirect("main.jsp");
     return; // <--- Here.
 } %>

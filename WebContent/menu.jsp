@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -53,6 +53,13 @@ body{
 	color: rgb(124, 124, 163);
 	padding: 12px;
 }
+
+.greet2{
+	font-size: 20px;
+	font-weight: 700;
+	color: rgb(255, 0, 0);
+	padding: 12px;
+}
 </style>
 </head>
 <body>
@@ -63,6 +70,11 @@ body{
 		out.println("<a href='login.jsp' class='home'>Login</a><a href='register.jsp' class='home'>Register</a>"); 
 	} else { 
 		out.println("<span class='greet'>Hello "+ sess+ "</span><a href='login.jsp?logout=do' class='home'>Logout</a><a href='profile.jsp' class='home'>Profile</a>"); 
+	} %>
+	<% if (request.getParameter("addedto") != null) {  
+			if(request.getParameter("addedto").equals("success")){
+				out.println("<span class='greet2'>Product Successfully added to Cart</span>");  
+			}
 	} %>
 	<a href='viewcart.jsp' class='home'>View Cart</a>
 	<a href='inventory.jsp' class='home'>Browse Products</a>

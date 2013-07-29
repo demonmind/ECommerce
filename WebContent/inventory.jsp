@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="com.kd.ecommerce.DBConnect" %> 
-<%@ page import="java.sql.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -57,7 +56,7 @@ while (rs.next()) {
 	if(sess == null || sess == "") { 
 		
 	} else { 
-		out.println("<TD><a href='addtocart?product="+rs.getString(2)+"'>Add To Cart</a></TD>"); 
+		out.println("<TD><a href='addtocart?product="+rs.getString(1)+"'>Add To Cart</a></TD>"); 
 	} 
 %>
 </TR>
