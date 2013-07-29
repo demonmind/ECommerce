@@ -37,7 +37,6 @@ top: 60px;
 	ServletContext sc = getServletConfig().getServletContext();
 	if(sc.getAttribute("shop") != null){
 		ArrayList<Products> it = (ArrayList<Products>)sc.getAttribute("shop");
-		out.println(it);
 		for(int i = 0; i< it.size(); i++){
 			out.println("<span class='price'>"+it.get(i).getPrice()+"</span>");
 		}

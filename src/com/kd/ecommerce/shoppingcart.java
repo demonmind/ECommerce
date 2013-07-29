@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class shoppingcart {
 	private static ArrayList<Products> items;
 
-	public shoppingcart(ArrayList<Products> l){
-		items = l;
+	public shoppingcart(){
+		items = new ArrayList<Products>();
 	}
 	
 	public void ins(Products p){

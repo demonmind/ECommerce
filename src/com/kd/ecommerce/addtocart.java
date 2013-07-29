@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/addtocart")
 public class addtocart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Products> s = new ArrayList<Products>();
-	private shoppingcart shop = new shoppingcart(s);
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext thisContext = getServletContext(); 
@@ -33,6 +30,7 @@ public class addtocart extends HttpServlet {
 			while(rs.next()){
 				Products p = new Products(rs.getString(2),rs.getString(3),rs.getString(4),rs.getFloat(5));
 				System.out.println(p.getName()+":"+ p.getPrice());
+				shoppingcart shop = new shoppingcart();
 				shop.ins(p);
 				thisContext.setAttribute("shop", shop.getIt());
 				for(int i = 0; i< shop.getIt().size(); i++){
