@@ -53,7 +53,13 @@ while (rs.next()) {
 <TD><div class='image'><img src='<%=rs.getString(3)%>' width='160px' height='160px'/></div></TD>
 <TD><div class='desc'><%=rs.getString(4)%></div></TD>
 <TD><div class='price'>$<%=rs.getString(5)%></div></TD>
-<TD><a href='addtocart?product=<%= rs.getString(2) %>'>Add To Cart</a></TD>
+<% String sess = (String) session.getAttribute("uname");
+	if(sess == null || sess == "") { 
+		
+	} else { 
+		out.println("<TD><a href='addtocart?product="+rs.getString(2)+"'>Add To Cart</a></TD>"); 
+	} 
+%>
 </TR>
 <% } %>
 <%
