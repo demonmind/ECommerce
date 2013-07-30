@@ -11,7 +11,8 @@
 <title>CART</title>
 </head>
 <body>
-<style>
+<style type='text/css'>
+
 .empty{
 font-size: 20px;
 font-weight: 700;
@@ -67,7 +68,7 @@ float:right
 			out.println("<td>");out.println("</td>");
 			out.println("<td>");out.println("</td>");
 			out.println("<td>");out.println("</td>");
-			out.println("<td>");out.println("<span class='price right'><a href='checkout.do'>Checkout</a></span>");out.println("</td>");
+			out.println("<td>");out.println("<span class='price right'><a href='checkout.jsp'>Checkout</a></span>");out.println("</td>");
 		out.println("<tr>");
 		out.println("</table>");
 	}else{

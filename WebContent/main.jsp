@@ -34,7 +34,7 @@
 		<img src="http://www.biobus.gsu.edu/biobushome_files/gsulogo.gif" />
 	</div>
 	<div id="welcometext">
-		Welcome to the GSU STORE
+		Welcome to the GSU STORE<br /><span>${msg}</span>
 		<% if (request.getParameter("login") != null) {  
 			if(request.getParameter("login").equals("true")){
 				out.println("<span class='greet'>Successfully Logged In</span>");  

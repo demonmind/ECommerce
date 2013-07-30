@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>PROFILE</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <style type="text/css">
 table{
 	top: 63px;
@@ -74,6 +75,7 @@ background-color:rgb(238, 211, 211) !important;
 <TABLE cellpadding="15" border="0" id='profiletable'>
 <%
 while (rs.next()) {
+	session.setAttribute("address", rs.getString(6));
 %>
 <TR>
 <TD><div class='name'>Name:</div></TD>
@@ -187,6 +189,16 @@ out.println("<span style='position: relative;top: 200px;text-align:center;font-s
 }
 %>
 <div class='edit'><a href='#' id='edit' onclick='createedit();'>Edit Profile</a></div>
-
+<%
+	if (request.getParameter("edit") != null){
+%>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#edit").click();
+});
+</script>
+<%		
+	}
+%>
 </body>
 </html>
