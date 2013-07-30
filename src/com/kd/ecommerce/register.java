@@ -28,9 +28,9 @@ public class register extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		String uname = request.getParameter("username");
-		String pwd = request.getParameter("password");
-		String email = request.getParameter("email");
+		String uname = request.getParameter("username").replaceAll("\\s","");
+		String pwd = request.getParameter("password").replaceAll("\\s","");
+		String email = request.getParameter("email").replaceAll("\\s","");
 		if(uname != null && pwd != null && pwd != null && htmlFilter(uname.trim()).length() != 0 && htmlFilter(pwd.trim()).length() != 0 &&  htmlFilter(email.trim()).length() != 0){
 			registerUser(request.getParameter("username"),request.getParameter("password"),request.getParameter("email"));
 			session.setAttribute("uname", uname);

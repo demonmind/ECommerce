@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<%@ page import="java.sql.*" %>
+<%@ page import="com.kd.ecommerce.*" %> 
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -76,7 +78,18 @@ body{
 				out.println("<span class='greet2'>Product Successfully added to Cart</span>");  
 			}
 	} %>
-	<a href='viewcart.jsp' class='home'>View Cart</a>
+	<a href='viewcart.jsp' class='home'>View Cart(
+	<%
+	if(session.getAttribute("shop") != null){
+		shoppingcart sh = (shoppingcart)session.getAttribute("shop");
+		ArrayList<Products> pd = sh.getIt();
+		out.println(pd.size());
+	}else{
+		out.println("0");
+	}
+	%>
+	 items)
+	</a>
 	<a href='inventory.jsp' class='home'>Browse Products</a>
 	<a href='main.jsp' class='home'>Home</a>
 </div>

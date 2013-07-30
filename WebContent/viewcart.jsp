@@ -30,15 +30,40 @@ padding: 12px;
 position: relative;
 top: 60px;
 }
+
+table{
+width: 100%;
+position: relative;
+top: 55px;
+}
+
+.right{
+float:right
+}
 </style>
 <jsp:include page="menu.jsp"></jsp:include>
 <% 
 	if(session.getAttribute("shop") != null){
 		shoppingcart sh = (shoppingcart)session.getAttribute("shop");
 		ArrayList<Products> pd = sh.getIt();
+		float total = 0;
+		out.println("<table>");
 		for(int i = 0; i< pd.size(); i++){
-			out.println("<span class='price'>"+pd.get(i).getPrice()+"</span>");
+			out.println("<tr>");
+			out.println("<td><span class='name'>"+pd.get(i).getName()+"</span></td>");
+			out.println("<td><span class='image'><img src='"+pd.get(i).getImage()+"' width='160px' height='160px'></span></td>");
+			out.println("<td><span class='desc'>"+pd.get(i).getDesc()+"</span></td>");
+			out.println("<td><span class='price'>$"+pd.get(i).getPrice()+"</span></td>");
+			out.println("</tr>");
+			total += pd.get(i).getPrice();
 		}
+		out.println("<tr>");
+			out.println("<td>");out.println("</td>");
+			out.println("<td>");out.println("</td>");
+			out.println("<td>");out.println("<span class='price right'>Total</span>");out.println("</td>");
+			out.println("<td>");out.println("<span class='price'>$"+total+"</span>");out.println("</td>");
+		out.println("<tr>");
+		out.println("</table>");
 	}else{
 		out.println("<span class='empty'>Shopping cart empty</span>");
 	}

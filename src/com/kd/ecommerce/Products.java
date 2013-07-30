@@ -6,11 +6,11 @@ public class Products {
 	private String desc;
 	private String img;
 	
-	public Products(String n, String d, String i,Float p){
+	public Products(String n, String i, String d,Float p){
 		name = n;
-		price = p;
 		desc = d;
 		img = i;
+		price = p;
 	}
 	
 	public String getName(){
