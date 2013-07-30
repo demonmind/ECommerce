@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
-
 /**
  * Servlet implementation class login
  */
@@ -47,8 +45,22 @@ public class login extends HttpServlet {
         }
 	}
 	
+	public static String encrypt(String md5) {
+	   try {
+	        java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+	        byte[] array = md.digest(md5.getBytes());
+	        StringBuffer sb = new StringBuffer();
+	        for (int i = 0; i < array.length; ++i) {
+	          sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+	       }
+	        return sb.toString();
+	    } catch (java.security.NoSuchAlgorithmException e) {
+	    }
+	    return null;
+	}
+	
 	public static boolean logged(String usr, String pass) {
-        query = "select * from customers where username = '"+usr+"' and password = '"+pass+"'";
+        query = "select * from customers where username = '"+usr+"' and password = '"+encrypt(pass)+"'";
         Boolean found = false;
         try {
             Connection cn = DBConnect.getInstance();

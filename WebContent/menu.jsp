@@ -88,7 +88,7 @@ body{
 		out.println("0");
 	}
 	%>
-	 items)
+	 items )
 	</a>
 	<a href='inventory.jsp' class='home'>Browse Products</a>
 	<a href='main.jsp' class='home'>Home</a>

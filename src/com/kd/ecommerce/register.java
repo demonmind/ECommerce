@@ -32,27 +32,46 @@ public class register extends HttpServlet {
 		String pwd = request.getParameter("password").replaceAll("\\s","");
 		String email = request.getParameter("email").replaceAll("\\s","");
 		if(uname != null && pwd != null && pwd != null && htmlFilter(uname.trim()).length() != 0 && htmlFilter(pwd.trim()).length() != 0 &&  htmlFilter(email.trim()).length() != 0){
-			registerUser(request.getParameter("username"),request.getParameter("password"),request.getParameter("email"));
-			session.setAttribute("uname", uname);
-			request.setAttribute("msg","Successfully Logged In");
-            request.getRequestDispatcher("main.jsp").forward(request, response);
+			if(registerUser(uname,pwd,email)){
+				session.setAttribute("uname", uname);
+				request.setAttribute("msg","Successfully Logged In");
+				request.getRequestDispatcher("main.jsp").forward(request, response);
+			}else{
+				request.setAttribute("msg","Username Taken or Other Error Verified");
+	            request.getRequestDispatcher("register.jsp").forward(request, response);
+			}
 		}else{
 			request.setAttribute("msg","Please fill in all the fields");
             request.getRequestDispatcher("register.jsp").forward(request, response);
 		}
 	}
 	
-	public static void registerUser(String usr, String pass, String email) {
-        query = "insert into customers values( DEFAULT,'"+usr+"','"+pass+"','"+email+"', 0)";
+	public static boolean registerUser(String usr, String pass, String email) {
+        query = "insert into customers values( DEFAULT,'"+htmlFilter(usr)+"','"+encrypt(htmlFilter(pass))+"','"+htmlFilter(email)+"', 0)";
         try {
             Connection cn = DBConnect.getInstance();
             Statement st = cn.createStatement();
             st.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return true;
+        } catch(SQLException e) {
+        	return false;
         }
 
     }
+	
+	public static String encrypt(String md5) {
+	   try {
+	        java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+	        byte[] array = md.digest(md5.getBytes());
+	        StringBuffer sb = new StringBuffer();
+	        for (int i = 0; i < array.length; ++i) {
+	          sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+	       }
+	        return sb.toString();
+	    } catch (java.security.NoSuchAlgorithmException e) {
+	    }
+	    return null;
+	}
 	
 	private static String htmlFilter(String message){
 		if(message == null) return null;
