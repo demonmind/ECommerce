@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %>
-<%@ page import="com.kd.ecommerce.DBConnect" %> 
+<%@ page import="com.kd.ecommerce.*" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,11 +43,27 @@ top: 19px;
 font-weight: 700;
 color: rgb(85, 141, 141);
 }
+
+#username{
+background-color:rgb(238, 211, 211) !important;
 }
 </style>
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
+<% if(request.getParameter("submit") != null) {
+	System.out.println("Executing");
+	String uname = (String)session.getAttribute("uname");
+	String em = (String)request.getParameter("email");
+	String ad = (String)request.getParameter("address");
+	String c = (String)request.getParameter("city");
+	String s = (String)request.getParameter("state");
+	String z = (String)request.getParameter("zip");
+
+	User u = new User(uname, em, ad, c, s, z);
+	u.updateUser();
+}
+%>
 <%try { 
 	String name = (String)session.getAttribute("uname"); 
 	Connection cn = DBConnect.getInstance();
@@ -99,6 +115,8 @@ function createedit(){
 	i.setAttribute('type',"text");
 	i.setAttribute('name',"username");
 	i.setAttribute('value','<%= rs.getString(2) == null ? "" : rs.getString(2) %>');
+	i.setAttribute('disabled', true);
+	i.setAttribute('id','username');
 	
 	var name = document.createElement("div");
 	name.innerHTML = 'Email: ';
@@ -143,6 +161,7 @@ function createedit(){
 	var s = document.createElement("input"); //input element, Submit button
 	s.setAttribute('type',"submit");
 	s.setAttribute('value',"Submit");
+	s.setAttribute('name', 'submit');
 
 	f.appendChild(i);
 	f.appendChild(j);

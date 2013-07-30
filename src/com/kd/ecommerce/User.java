@@ -1,12 +1,8 @@
 package com.kd.ecommerce;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class User {
 	
@@ -16,6 +12,15 @@ public class User {
 	private String city = null;
 	private String state = null;
 	private String zip = null;
+	
+	public User( String un, String em, String ad, String c, String s, String z){
+		username = un;
+		email=em;
+		address =ad;
+		city =c;
+		state = s;
+		zip = z;
+	}
 	
 	public String getUsername(){
 		return username;
@@ -65,13 +70,12 @@ public class User {
 		zip = z;
 	}
 	
-	public void updateUser(HttpServletRequest request){
+	public void updateUser(){
 		try { 
-			HttpSession ses = request.getSession();
-			String query = "UPDATE users SET name='"+username+"' email='"+email+"' address='"+address+"' city='"+city+"' state='"+state+"' zip ='"+zip+"' WHERE username='"+ses.getAttribute("uname")+"'";
+			String query = "UPDATE customers SET email='"+email+"', address='"+address+"', city='"+city+"', state='"+state+"', zip ='"+zip+"' WHERE username='"+username+"'";
 			Connection cn = DBConnect.getInstance();
 			Statement st = cn.createStatement();
-			st.execute(query);
+			st.executeUpdate(query);
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
