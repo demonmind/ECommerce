@@ -63,6 +63,12 @@ float:right
 			out.println("<td>");out.println("<span class='price right'>Total</span>");out.println("</td>");
 			out.println("<td>");out.println("<span class='price'>$"+total+"</span>");out.println("</td>");
 		out.println("<tr>");
+		out.println("<tr>");
+			out.println("<td>");out.println("</td>");
+			out.println("<td>");out.println("</td>");
+			out.println("<td>");out.println("</td>");
+			out.println("<td>");out.println("<span class='price right'><a href='checkout.do'>Checkout</a></span>");out.println("</td>");
+		out.println("<tr>");
 		out.println("</table>");
 	}else{
 		out.println("<span class='empty'>Shopping cart empty</span>");
