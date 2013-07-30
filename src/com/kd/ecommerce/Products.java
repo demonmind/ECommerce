@@ -1,10 +1,10 @@
 package com.kd.ecommerce;
 
 public class Products {
-	private static String name;
-	private static Float price;
-	private static String desc;
-	private static String img;
+	private String name;
+	private Float price;
+	private String desc;
+	private String img;
 	
 	public Products(String n, String d, String i,Float p){
 		name = n;

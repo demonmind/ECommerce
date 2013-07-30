@@ -28,17 +28,16 @@ font-weight: 700;
 color: rgb(255, 0, 0);
 padding: 12px;
 position: relative;
-left: -200px;
 top: 60px;
 }
 </style>
 <jsp:include page="menu.jsp"></jsp:include>
 <% 
-	ServletContext sc = getServletConfig().getServletContext();
-	if(sc.getAttribute("shop") != null){
-		ArrayList<Products> it = (ArrayList<Products>)sc.getAttribute("shop");
-		for(int i = 0; i< it.size(); i++){
-			out.println("<span class='price'>"+it.get(i).getPrice()+"</span>");
+	if(session.getAttribute("shop") != null){
+		shoppingcart sh = (shoppingcart)session.getAttribute("shop");
+		ArrayList<Products> pd = sh.getIt();
+		for(int i = 0; i< pd.size(); i++){
+			out.println("<span class='price'>"+pd.get(i).getPrice()+"</span>");
 		}
 	}else{
 		out.println("<span class='empty'>Shopping cart empty</span>");

@@ -6,22 +6,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class addtocart
- */
+
 @WebServlet("/addtocart")
 public class addtocart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServletContext thisContext = getServletContext(); 
+		HttpSession session = request.getSession(true);
+		shoppingcart shop = (shoppingcart)session.getAttribute("shop");
+		if(shop == null) {
+		    shop = new shoppingcart();
+		    session.setAttribute("shop", shop);
+		}
 		String name = request.getParameter("product");
 		Connection cn = DBConnect.getInstance();
 		try {
@@ -30,12 +33,7 @@ public class addtocart extends HttpServlet {
 			while(rs.next()){
 				Products p = new Products(rs.getString(2),rs.getString(3),rs.getString(4),rs.getFloat(5));
 				System.out.println(p.getName()+":"+ p.getPrice());
-				shoppingcart shop = new shoppingcart();
-				shop.ins(p);
-				thisContext.setAttribute("shop", shop.getIt());
-				for(int i = 0; i< shop.getIt().size(); i++){
-					System.out.println(shop.getIt().get(i)+":"+ shop.getIt().get(i).getPrice());
-				}
+				shop.ins(p);	
 				response.sendRedirect("inventory.jsp?addedto=success");
 			}
 		} catch (SQLException e) {
