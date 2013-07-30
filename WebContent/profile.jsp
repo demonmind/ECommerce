@@ -14,6 +14,36 @@ table{
 	margin: 0 auto;
 	position: relative;
 }
+
+#profileform{
+position: relative;
+width: 400px;
+margin: 0 auto;
+top: 60px;
+}
+
+#profileform input{
+width: 250px;
+height: 27px;
+font-size: 16px;
+font-weight: bold;
+background-color: rgb(220, 249, 252);
+margin: 10px;
+border-radius: 6px;
+}
+
+#profileform div{
+float: left;
+position: relative;
+left: -136px;
+width: 0px;
+height: 54px;
+clear: both;
+top: 19px;
+font-weight: 700;
+color: rgb(85, 141, 141);
+}
+}
 </style>
 </head>
 <body>
@@ -25,7 +55,7 @@ table{
 	Statement st = cn.createStatement();
 	ResultSet rs = st.executeQuery(query);
 %>
-<TABLE cellpadding="15" border="0">
+<TABLE cellpadding="15" border="0" id='profiletable'>
 <%
 while (rs.next()) {
 %>
@@ -53,6 +83,80 @@ while (rs.next()) {
 <TD><div class='name'>Zip:</div></TD>
 <TD><div class='image'><%=rs.getString(9) == null ? "Not Set" : rs.getString(9)%></div></TD>
 </TR>
+</TABLE>
+<script type="text/javascript">
+function createedit(){
+	var f = document.createElement("form");
+	f.setAttribute('method',"post");
+	f.setAttribute('action',"profile.jsp");
+	f.setAttribute('id',"profileform");
+
+	var name = document.createElement("div");
+	name.innerHTML = 'Name: ';
+	f.appendChild(name);
+	
+	var i = document.createElement("input"); //input element, text
+	i.setAttribute('type',"text");
+	i.setAttribute('name',"username");
+	i.setAttribute('value','<%= rs.getString(2) == null ? "" : rs.getString(2) %>');
+	
+	var name = document.createElement("div");
+	name.innerHTML = 'Email: ';
+	f.appendChild(name);
+	var j = document.createElement("input"); //input element, text
+	j.setAttribute('type',"text");
+	j.setAttribute('name',"email");
+	j.setAttribute('value','<%= rs.getString(4) == null ? "" : rs.getString(4) %>');
+	
+	var name = document.createElement("div");
+	name.innerHTML = 'Address: ';
+	f.appendChild(name);
+	var k = document.createElement("input"); //input element, text
+	k.setAttribute('type',"text");
+	k.setAttribute('name',"address");
+	k.setAttribute('value','<%= rs.getString(6) == null ? "" : rs.getString(6) %>');
+	
+	var name = document.createElement("div");
+	name.innerHTML = 'City: ';
+	f.appendChild(name);
+	var l = document.createElement("input"); //input element, text
+	l.setAttribute('type',"text");
+	l.setAttribute('name',"city");
+	l.setAttribute('value','<%= rs.getString(7) == null ? "" : rs.getString(7) %>');
+	
+	var name = document.createElement("div");
+	name.innerHTML = 'State: ';
+	f.appendChild(name);
+	var m = document.createElement("input"); //input element, text
+	m.setAttribute('type',"text");
+	m.setAttribute('name',"state");
+	m.setAttribute('value','<%= rs.getString(8) == null ? "" : rs.getString(8) %>');
+	
+	var name = document.createElement("div");
+	name.innerHTML = 'ZIP: ';
+	f.appendChild(name);
+	var n = document.createElement("input"); //input element, text
+	n.setAttribute('type',"text");
+	n.setAttribute('name',"zip");
+	n.setAttribute('value','<%= rs.getString(9) == null ? "" : rs.getString(9) %>');
+
+	var s = document.createElement("input"); //input element, Submit button
+	s.setAttribute('type',"submit");
+	s.setAttribute('value',"Submit");
+
+	f.appendChild(i);
+	f.appendChild(j);
+	f.appendChild(k);
+	f.appendChild(l);
+	f.appendChild(m);
+	f.appendChild(n);
+	f.appendChild(s);
+	
+	var elem = document.getElementById('profiletable');
+	elem.parentNode.removeChild(elem);
+	document.getElementsByTagName('body')[0].appendChild(f);
+}
+</script>
 <% } %>
 <%
 // close all the connections.
@@ -63,48 +167,7 @@ while (rs.next()) {
 out.println("<span style='position: relative;top: 200px;text-align:center;font-size: 22px;color: red;'>Unable to connect to database.<span>");
 }
 %>
-</TABLE>
-<div class='edit'><a href='#' id='edit'>Edit Profile</a></div>
-<script type="text/javascript">
-	var f = document.createElement("form");
-	f.setAttribute('method',"post");
-	f.setAttribute('action',"profile.jsp");
+<div class='edit'><a href='#' id='edit' onclick='createedit();'>Edit Profile</a></div>
 
-	var i = document.createElement("input"); //input element, text
-	i.setAttribute('type',"text");
-	i.setAttribute('name',"username");
-	
-	var i = document.createElement("input"); //input element, text
-	i.setAttribute('type',"text");
-	i.setAttribute('name',"username");
-	
-	var i = document.createElement("input"); //input element, text
-	i.setAttribute('type',"text");
-	i.setAttribute('name',"username");
-	
-	var i = document.createElement("input"); //input element, text
-	i.setAttribute('type',"text");
-	i.setAttribute('name',"username");
-	
-	var i = document.createElement("input"); //input element, text
-	i.setAttribute('type',"text");
-	i.setAttribute('name',"username");
-	
-	var i = document.createElement("input"); //input element, text
-	i.setAttribute('type',"text");
-	i.setAttribute('name',"username");
-
-	var s = document.createElement("input"); //input element, Submit button
-	s.setAttribute('type',"submit");
-	s.setAttribute('value',"Submit");
-
-	f.appendChild(i);
-	f.appendChild(s);
-
-//and some more input elements here
-//and dont forget to add a submit button
-
-document.getElementsByTagName('body')[0].appendChild(f);
-</script>
 </body>
 </html>

@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 public class User {
 	
 	private String username = null;
@@ -62,14 +65,15 @@ public class User {
 		zip = z;
 	}
 	
-	public void updateUser(){
+	public void updateUser(HttpServletRequest request){
 		try { 
-			String query = "UPDATE users SET name= email= address= city= state= zip = WHERE username='"+username+"'";
+			HttpSession ses = request.getSession();
+			String query = "UPDATE users SET name='"+username+"' email='"+email+"' address='"+address+"' city='"+city+"' state='"+state+"' zip ='"+zip+"' WHERE username='"+ses.getAttribute("uname")+"'";
 			Connection cn = DBConnect.getInstance();
 			Statement st = cn.createStatement();
-			ResultSet rs = st.executeQuery(query);
+			st.execute(query);
 		}catch(SQLException e){
-			
+			System.out.println(e.getMessage());
 		}
 	}
 }
