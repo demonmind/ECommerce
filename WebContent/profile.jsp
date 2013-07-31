@@ -17,10 +17,15 @@ table{
 }
 
 #profileform{
-position: relative;
-width: 400px;
+background-color: #DEECF7;
+width: 19%;
 margin: 0 auto;
-top: 60px;
+position: relative;
+top: 110px;
+box-shadow: 10px 10px 5px #888888;
+padding: 10px;
+color: rgb(21, 126, 185);
+font-weight: 700;
 }
 
 #profileform input{
@@ -47,6 +52,59 @@ color: rgb(85, 141, 141);
 
 #username{
 background-color:rgb(238, 211, 211) !important;
+}
+
+#profiletable{
+background-color: #DEECF7;
+width: 37%;
+margin: 0 auto;
+position: relative;
+top: 110px;
+box-shadow: 10px 10px 5px #888888;
+padding: 10px;
+color: rgb(21, 126, 185);
+font-weight: 700;
+}
+
+tr.border_top td {
+	border-bottom: 2pt solid rgb(236, 106, 106);
+	padding-bottom: 10px;
+}
+
+.edit{
+position: relative;
+top: 144px;
+text-align: center;
+}
+
+.edit a{
+	-moz-box-shadow:inset 0px 0px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 0px 0px 0px #ffffff;
+	box-shadow:inset 0px 0px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1e1e6), color-stop(1, #6dc1f2) );
+	background:-moz-linear-gradient( center top, #d1e1e6 5%, #6dc1f2 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1e1e6', endColorstr='#6dc1f2');
+	background-color:#d1e1e6;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}.edit a:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6dc1f2), color-stop(1, #d1e1e6) );
+	background:-moz-linear-gradient( center top, #6dc1f2 5%, #d1e1e6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6dc1f2', endColorstr='#d1e1e6');
+	background-color:#6dc1f2;
+}.edit a:active {
+	position:relative;
+	top:1px;
 }
 </style>
 </head>
@@ -77,27 +135,27 @@ background-color:rgb(238, 211, 211) !important;
 while (rs.next()) {
 	session.setAttribute("address", rs.getString(6));
 %>
-<TR>
+<TR class='border_top'>
 <TD><div class='name'>Name:</div></TD>
 <TD><div class='image'><%=rs.getString(2)%></div></TD>
 </TR>
-<TR>
+<TR class='border_top'>
 <TD><div class='name'>Email:</div></TD>
 <TD><div class='image'><%=rs.getString(4)%></div></TD>
 </TR>
-<TR>
+<TR class='border_top'>
 <TD><div class='name'>Address:</div></TD>
 <TD><div class='image'><%= rs.getString(6) == null ? "Not Set" : rs.getString(6) %></div></TD>
 </TR>
-<TR>
+<TR class='border_top'>
 <TD><div class='name'>City:</div></TD>
 <TD><div class='image'><%=rs.getString(7) == null ? "Not Set" : rs.getString(7)%></div></TD>
 </TR>
-<TR>
+<TR class='border_top'>
 <TD><div class='name'>State:</div></TD>
 <TD><div class='image'><%=rs.getString(8) == null ? "Not Set" : rs.getString(8)%></div></TD>
 </TR>
-<TR>
+<TR class='border_top'>
 <TD><div class='name'>Zip:</div></TD>
 <TD><div class='image'><%=rs.getString(9) == null ? "Not Set" : rs.getString(9)%></div></TD>
 </TR>
@@ -175,6 +233,8 @@ function createedit(){
 	
 	var elem = document.getElementById('profiletable');
 	elem.parentNode.removeChild(elem);
+	var edit = document.getElementById('editing');
+	edit.parentNode.removeChild(edit);
 	document.getElementsByTagName('body')[0].appendChild(f);
 }
 </script>
@@ -188,13 +248,13 @@ function createedit(){
 out.println("<span style='position: relative;top: 200px;text-align:center;font-size: 22px;color: red;'>Unable to connect to database.<span>");
 }
 %>
-<div class='edit'><a href='#' id='edit' onclick='createedit();'>Edit Profile</a></div>
+<div class='edit'><a href='#' id='editing' onclick='createedit();'>Edit Profile</a></div>
 <%
 	if (request.getParameter("edit") != null){
 %>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#edit").click();
+	$("#editing").click();
 });
 </script>
 <%		

@@ -9,9 +9,13 @@
 <title>Products</title>
 <style>
 table{
-	background-color: #DEECF7;
-	width: 100%;
-	margin-top: 45px;
+background-color: #DEECF7;
+width: 80%;
+margin: 0 auto;
+position: relative;
+top: 64px;
+box-shadow: 10px 10px 5px #888888;
+padding-bottom: 10px;
 }
 .name{
 float: left;
@@ -31,6 +35,36 @@ margin-left: 40px;
 .price{
 float: left;
 margin-left: 40px;
+}
+
+.addtocart {
+	-moz-box-shadow:inset 0px 0px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 0px 0px 0px #ffffff;
+	box-shadow:inset 0px 0px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1e1e6), color-stop(1, #6dc1f2) );
+	background:-moz-linear-gradient( center top, #d1e1e6 5%, #6dc1f2 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1e1e6', endColorstr='#6dc1f2');
+	background-color:#d1e1e6;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}.addtocart:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6dc1f2), color-stop(1, #d1e1e6) );
+	background:-moz-linear-gradient( center top, #6dc1f2 5%, #d1e1e6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6dc1f2', endColorstr='#d1e1e6');
+	background-color:#6dc1f2;
+}.addtocart:active {
+	position:relative;
+	top:1px;
 }
 </style>
 </head>
@@ -56,7 +90,7 @@ while (rs.next()) {
 	if(sess == null || sess == "") { 
 		
 	} else { 
-		out.println("<TD><a href='addtocart?product="+rs.getString(1)+"'>Add To Cart</a></TD>"); 
+		out.println("<TD style='width: 150px;'><a href='addtocart?product="+rs.getString(1)+"' class='addtocart'>Add To Cart</a></TD>"); 
 	} 
 %>
 </TR>

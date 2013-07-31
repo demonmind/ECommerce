@@ -33,13 +33,52 @@ top: 60px;
 }
 
 table{
-width: 100%;
+background-color: #DEECF7;
+width: 80%;
+margin: 0 auto;
 position: relative;
-top: 55px;
+top: 64px;
+box-shadow: 10px 10px 5px #888888;
+padding: 10px;
 }
 
 .right{
 float:right
+}
+
+.checkout {
+	-moz-box-shadow:inset 0px 0px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 0px 0px 0px #ffffff;
+	box-shadow:inset 0px 0px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1e1e6), color-stop(1, #6dc1f2) );
+	background:-moz-linear-gradient( center top, #d1e1e6 5%, #6dc1f2 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1e1e6', endColorstr='#6dc1f2');
+	background-color:#d1e1e6;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}.checkout:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6dc1f2), color-stop(1, #d1e1e6) );
+	background:-moz-linear-gradient( center top, #6dc1f2 5%, #d1e1e6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6dc1f2', endColorstr='#d1e1e6');
+	background-color:#6dc1f2;
+}.checkout:active {
+	position:relative;
+	top:1px;
+}
+
+tr.border_bottom td {
+	border-bottom: 2pt solid rgb(236, 106, 106);
+	padding-bottom: 10px;
 }
 </style>
 <jsp:include page="menu.jsp"></jsp:include>
@@ -49,6 +88,12 @@ float:right
 		ArrayList<Products> pd = sh.getIt();
 		float total = 0;
 		out.println("<table>");
+		out.println("<tr class='border_bottom'>");
+		out.println("<td><span class='name'>Item Name</span></td>");
+		out.println("<td><span class='image'>Image</span></td>");
+		out.println("<td><span class='desc'>Description</span></td>");
+		out.println("<td><span class='prc'>$ Price</span></td>");
+		out.println("</tr>");
 		for(int i = 0; i< pd.size(); i++){
 			out.println("<tr>");
 			out.println("<td><span class='name'>"+pd.get(i).getName()+"</span></td>");
@@ -58,17 +103,17 @@ float:right
 			out.println("</tr>");
 			total += pd.get(i).getPrice();
 		}
-		out.println("<tr>");
+		out.println("<tr class='border_bottom'>");
 			out.println("<td>");out.println("</td>");
 			out.println("<td>");out.println("</td>");
 			out.println("<td>");out.println("<span class='price right'>Total</span>");out.println("</td>");
-			out.println("<td>");out.println("<span class='price'>$"+total+"</span>");out.println("</td>");
+			out.println("<td>");out.println("<span class='price'>$"+total+"</span>");out.println("<span class='price'><a href='checkout.jsp' class='checkout'>Checkout</a></span>");out.println("</td>");
 		out.println("<tr>");
 		out.println("<tr>");
 			out.println("<td>");out.println("</td>");
 			out.println("<td>");out.println("</td>");
 			out.println("<td>");out.println("</td>");
-			out.println("<td>");out.println("<span class='price right'><a href='checkout.jsp'>Checkout</a></span>");out.println("</td>");
+			out.println("<td>");out.println("<span class='price'></span>");out.println("</td>");
 		out.println("<tr>");
 		out.println("</table>");
 	}else{
