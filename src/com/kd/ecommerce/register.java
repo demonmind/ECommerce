@@ -86,6 +86,7 @@ public class register extends HttpServlet {
             	case '>': result.append("&gt;"); break;
             	case '&': result.append("&amp;"); break;
             	case '"': result.append("&quot;"); break;
+            	case ';': result.append("&no;"); break;
             	default: result.append(aChar);
 			}
 		}
